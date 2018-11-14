@@ -1,11 +1,30 @@
-function SetTime() {
-    return setTimeout(() => {
-        console.log('a')
-    },1000).then(setTimeout(() => {
-        console.log('b')
-    }),100).then(setTimeout(() => {
-        console.log('c')
-    }),2000)
+function wait3() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(console.log('3 Second'))
+        }, 3000)
+    })
 }
 
-SetTime()
+function wait5() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(console.log('5 Second'))
+        }, 5000)
+    })
+}
+
+function instance4() {
+    console.log('4 Second but Instance')
+}
+
+function wait() {
+    return wait3().then(() => {
+        instance4()
+    }).then(() => {
+        wait5()
+    })
+}
+
+
+wait()
