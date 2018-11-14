@@ -1,13 +1,27 @@
-async function SetTime() {
-    let aTime = await setTimeout(() => {
-        console.log('a')
-    },1000)
-    let bTime = await setTimeout(() => {
-        console.log('b')
-    }, 100)
-    let cTime = setTimeout(() => {
-        console.log('c')
-    }, 2000)
+function wait3() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(console.log('3 Second'))
+        }, 3000)
+    })
 }
 
-SetTime()
+function wait5() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(console.log('5 Second'))
+        }, 5000)
+    })
+}
+
+function instance4() {
+    console.log('4 Second but Instance')
+}
+
+async function wait() {
+    await wait3()
+    await instance4()
+    await wait5()
+}
+
+wait()
